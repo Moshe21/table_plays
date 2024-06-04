@@ -10,6 +10,19 @@ button {
     background-color: #ffae00dc;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
+
+.reiniciar{
+  padding: 5% 5px; /* Ajusta el relleno para hacer los botones más grandes */
+    margin: 5px; /* Añade espacio entre los botones */
+    font-size: 20px; /* Tamaño de la fuente */
+    border-radius: 50%;
+    margin-bottom: 20px;
+    position: relative;
+    
+    border: 4px solid #00ff9d4b;
+    background-color: #33ff00;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
