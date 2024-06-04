@@ -73,3 +73,6 @@ function seleccionarTema() {
     // Por ahora, solo devolvemos un tema de ejemplo
        return seleccionarTema();
   }
+  function reiniciar_juego(){
+    location.reload()
+}
