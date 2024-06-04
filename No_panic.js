@@ -7,6 +7,7 @@ window.onload = function() {
     for (let i = 0; i < letters.length; i++) {
         const button = document.createElement('button');
         button.textContent = letters[i];
+        
         // Añade un evento de clic a cada botón
         button.addEventListener('click', function() {
             this.style.display = 'none';
