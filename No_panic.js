@@ -66,6 +66,7 @@ function seleccionarTema() {
         resultadoTemaElemento.textContent = "Tema seleccionado: " + temaSeleccionado.tema;
       }
     });
+    
   }
   
   function selectRandomTheme() {
