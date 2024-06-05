@@ -18,7 +18,7 @@ button {
 }
 
 .reiniciar{
-  padding: 5% 5px; /* Ajusta el relleno para hacer los botones más grandes */
+  padding: 2%; /* Ajusta el relleno para hacer los botones más grandes */
     margin: 5px; /* Añade espacio entre los botones */
     font-size: 20px; /* Tamaño de la fuente */
     border-radius: 50%;
