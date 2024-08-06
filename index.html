@@ -1,32 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>ruleta</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="No_panic.js"></script>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-
+    <title>Cuadrículas 9x9 con Encabezados</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: auto repeat(9, 30px);
+            grid-template-rows: auto repeat(9, 30px);
+            gap: 2px;
+            margin: 10px;
+        }
+        .cell, .header {
+            width: 30px;
+            height: 30px;
+            margin-left: -100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ccc;
+        
+        }
+        .cell {
+            cursor: pointer;
+        }
+        .controls {
+            margin: 10px;
+           
+        }
+        .controls button {
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
-       
-       <div class="container">
-        <h1>Ruleta loca</h1>
-        <div class="wheel-tamaño"></div>
-        <p class="wheel"></p>
-        <button class="spin-btn"   onclick="spinWheel()">Girar Ruleta</button>
+    <div class="controls">
+        <button onclick="setColor('red')">Rojo</button>
+        <button onclick="setColor('blue')">Azul</button>
+        <button onclick="setColor('green')">Verde</button>
+    </div>
+    <div class="grid-container">
+        <div class="grid" id="grid1"></div>
+        <div class="grid" id="grid2"></div>
+    </div>
+    <script>
+        let currentColor = 'red';
 
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+        function setColor(color) {
+            currentColor = color;
+            controls.addEventListener('click', function() {
+              this.style.backgroundColor ="red";})
+        }
 
-       <p id="resultadoTema"></p>
-       <div id="button-container">
-        <!-- Los botones serán generados aquí -->
-         </div>
-        <button class="reiniciar" onclick=" reiniciar_juego()">reniciar juego</button>
+        function createGrid(gridId) {
+            const grid = document.getElementById(gridId);
+            const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 
+            // Crear encabezados de columna
+            grid.appendChild(document.createElement('div')); // Celda vacía en la esquina superior izquierda
+            for (let i = 0; i < 9; i++) {
+                const header = document.createElement('div');
+                header.className = 'header';
+                header.textContent = letters[i];
+                grid.appendChild(header);
+            }
+
+            // Crear filas con encabezados de fila y celdas
+            for (let i = 0; i < 9; i++) {
+                const rowHeader = document.createElement('div');
+                rowHeader.className = 'header';
+                rowHeader.textContent = i + 1;
+                grid.appendChild(rowHeader);
+
+                for (let j = 0; j < 9; j++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.addEventListener('click', function() {
+                        this.style.backgroundColor = currentColor;
+                    });
+                    grid.appendChild(cell);
+                }
+            }
+        }
+
+        createGrid('grid1');
+        createGrid('grid2');
+    </script>
 </body>
-
-
-
 </html>

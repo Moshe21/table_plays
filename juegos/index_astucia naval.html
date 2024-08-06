@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuadrículas 9x9</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(9, 30px);
+            grid-template-rows: repeat(9, 30px);
+            gap: 2px;
+            margin: 10px;
+        }
+        .cell {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .controls {
+            margin: 10px;
+        }
+        .controls button {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <button onclick="setColor('red')">Rojo</button>
+        <button onclick="setColor('blue')">Azul</button>
+        <button onclick="setColor('green')">Verde</button>
+    </div>
+    <div class="grid-container">
+        <div class="grid" id="grid1"></div>
+        <div class="grid" id="grid2"></div>
+    </div>
+    <script>
+        let currentColor = 'red';
+
+        function setColor(color) {
+            currentColor = color;
+        }
+
+        function createGrid(gridId) {
+            const grid = document.getElementById(gridId);
+            for (let i = 0; i < 81; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'cell';
+                cell.addEventListener('click', function() {
+                    this.style.backgroundColor = currentColor;
+                });
+                grid.appendChild(cell);
+            }
+        }
+
+        createGrid('grid1');
+        createGrid('grid2');
+    </script>
+</body>
+</html>
