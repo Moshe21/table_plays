@@ -1,21 +1,11 @@
-const WebSocket = require('ws');
-
-const server = new WebSocket.Server({ port: 8080 });
-
-const clients = new Set();
-
-server.on('connection', (socket) => {
-    clients.add(socket);
-    socket.on('message', (message) => {
-        for (const client of clients) {
-            if (client !== socket && client.readyState === WebSocket.OPEN) {
-                client.send(message);
-            }
-        }
-    });
-    socket.on('close', () => {
-        clients.delete(socket);
-    });
-});
-
-console.log('WebSocket server is running on ws://localhost:8080');
+      // server.mjs
+      import { createServer } from 'node:http';
+      const server = createServer((req, res) => {
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end('Hello World!\n');
+      });
+      // starts a simple http server locally on port 3000
+      server.listen(3000, '127.0.0.1', () => {
+        console.log('Listening on 127.0.0.1:3000');
+      });
+      // run with `node server.mjs`
