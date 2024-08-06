@@ -1,11 +1,11 @@
       // server.mjs
-      import { createServer } from 'node:http';
-      const server = createServer((req, res) => {
-        res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.end('Hello World!\n');
-      });
-      // starts a simple http server locally on port 3000
-      server.listen(3000, '127.0.0.1', () => {
-        console.log('Listening on 127.0.0.1:3000');
-      });
+      const socket = new WebSocket('ws://localhost:8080');
+
+      socket.onmessage = (event) => {
+          const data = JSON.parse(event.data);
+          const cell = document.querySelector(`#${data.gridId} .cell:nth-child(${data.index + 11})`);
+          if (cell) {
+              cell.style.backgroundColor = data.color;
+          }
+      };
       // run with `node server.mjs`

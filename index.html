@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuadrículas 9x9 con Encabezados</title>
     <script src="/juegos/server.js"></script>
+    <title>Cuadrículas Sincronizadas 9x9</title>
     <style>
         .grid {
             display: grid;
@@ -16,19 +16,16 @@
         .cell, .header {
             width: 30px;
             height: 30px;
-            margin-left: -100;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 1px solid #ccc;
-        
         }
         .cell {
             cursor: pointer;
         }
         .controls {
             margin: 10px;
-           
         }
         .controls button {
             margin-right: 10px;
@@ -47,11 +44,18 @@
     </div>
     <script>
         let currentColor = 'red';
+        const socket = new WebSocket('ws://localhost:8080');
+
+        socket.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            const cell = document.querySelector(`#${data.gridId} .cell:nth-child(${data.index + 11})`);
+            if (cell) {
+                cell.style.backgroundColor = data.color;
+            }
+        };
 
         function setColor(color) {
             currentColor = color;
-            controls.addEventListener('click', function() {
-              this.style.backgroundColor ="red";})
         }
 
         function createGrid(gridId) {
@@ -79,6 +83,8 @@
                     cell.className = 'cell';
                     cell.addEventListener('click', function() {
                         this.style.backgroundColor = currentColor;
+                        const index = i * 9 + j;
+                        socket.send(JSON.stringify({ gridId, index, color: currentColor }));
                     });
                     grid.appendChild(cell);
                 }
